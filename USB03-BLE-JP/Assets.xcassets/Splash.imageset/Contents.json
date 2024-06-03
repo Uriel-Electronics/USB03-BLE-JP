@@ -1,0 +1,41 @@
+{
+  "images" : [
+    {
+      "filename" : "URIEL_symbol_logo_B 1.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "URIEL_symbol_logo_B 2.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "URIEL_symbol_logo_B 3.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    },
+    {
+      "filename" : "URIEL_symbol_logo_B 4.png",
+      "idiom" : "iphone",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "URIEL_symbol_logo_B 5.png",
+      "idiom" : "iphone",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "URIEL_symbol_logo_B 6.png",
+      "idiom" : "iphone",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
+  }
+}

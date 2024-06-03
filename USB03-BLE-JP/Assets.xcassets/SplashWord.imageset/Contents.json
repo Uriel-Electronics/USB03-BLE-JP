@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "URIEL_word_mark_logo_W.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "URIEL_word_mark_logo_W 1.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "URIEL_word_mark_logo_W 2.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
