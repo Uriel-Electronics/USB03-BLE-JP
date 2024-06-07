@@ -13,6 +13,7 @@ struct LandingView: View {
     @StateObject private var locationManager = LocationManager()
     @ObservedObject var timerViewModel = TimerViewModel()
     @EnvironmentObject var timeManager: TimeManager
+    @Environment(\.presentationMode) var presentationMode
     @Binding var navigateToLanding: Bool
     
     @State private var currentDate = Date()
@@ -28,7 +29,20 @@ struct LandingView: View {
     @State private var selectedDaysValue: UInt8 = 0
     @State private var dayNames: [String] = []
     
-
+    @State private var Mode5OnTime: Date = Date()
+    @State private var Mode5OffTime: Date = Date()
+    
+    @State private var Mode6OnTime: Date = Date()
+    @State private var Mode6OffTime: Date = Date()
+    @State private var Mode6OnTime2: Date = Date()
+    @State private var Mode6OffTime2: Date = Date()
+    
+//    @State var Mode5OnTime: Date = UserDefaults.standard.object(forKey: "Mode5 OnTime") as? Date ?? Date()
+//    @State var Mode5OffTime: Date = UserDefaults.standard.object(forKey: "Mode5 OffTime") as? Date ?? Date()
+//    @State var Mode6OnTime: Date = UserDefaults.standard.object(forKey: "Mode6 OnTime") as? Date ?? Date() // 일몰 전 시간
+//    @State var Mode6OffTime: Date = UserDefaults.standard.object(forKey: "Mode6 OffTime") as? Date ?? Date() // 일몰 후 시간
+//    @State var Mode6OnTime2: Date = UserDefaults.standard.object(forKey: "Mode6 OnTime2") as? Date ?? Date()
+//    @State var Mode6OffTime2: Date = UserDefaults.standard.object(forKey: "Mode6 OffTime2") as? Date ?? Date()
     // power on/off
     @State private var powerOnOff = true
     
@@ -219,10 +233,45 @@ struct LandingView: View {
                                                             .foregroundColor(.textLight)
                                                     }
                                                     
-                                                    Text(selectedMode)
-                                                        .font(Font.custom("Pretendard", size: 16).weight(.bold))
-                                                        .foregroundColor(.textLight)
-                                                        .padding(.top, 12)
+                                                    if selectedMode == "모드 1, 일몰 켜짐, 일출 꺼짐" {
+                                                        Text("モード運転１, 日没ON,　日出OFF")
+                                                            .font(Font.custom("Pretendard", size: 16).weight(.bold))
+                                                            .foregroundColor(.textLight)
+                                                            .padding(.top, 12)
+                                                    }
+                                                    else if (selectedMode == "모드 2, 일몰 켜짐, 밤중 꺼짐, 새벽 켜짐, 일출 꺼짐") {
+                                                        Text("モード運転２, 日没ON,　夜間OFF、早朝ON、日出OFF")
+                                                            .font(Font.custom("Pretendard", size: 16).weight(.bold))
+                                                            .foregroundColor(.textLight)
+                                                            .padding(.top, 12)
+                                                    }
+                                                    else if (selectedMode == "모드 3, 일몰 켜짐, 밤중 꺼짐") {
+                                                        Text("モード運転３, 日没ON,　夜間OFF")
+                                                            .font(Font.custom("Pretendard", size: 16).weight(.bold))
+                                                            .foregroundColor(.textLight)
+                                                            .padding(.top, 12)
+                                                    }
+                                                    else if (selectedMode == "모드 4, 새벽 켜짐, 일출 꺼짐") {
+                                                        Text("モード運転4, 早朝ON、日出OFF")
+                                                            .font(Font.custom("Pretendard", size: 16).weight(.bold))
+                                                            .foregroundColor(.textLight)
+                                                            .padding(.top, 12)
+                                                    }
+                                                    else if (selectedMode == "모드 5, 설정 시간 ON/OFF, 1회 반복") {
+                                                        Text("モード運転５, ONタイマー設定、OFFタイマー設定、1回選択")
+                                                            .font(Font.custom("Pretendard", size: 16).weight(.bold))
+                                                            .foregroundColor(.textLight)
+                                                            .padding(.top, 12)
+                                                    }
+                                                    else if (selectedMode == "모드 6, 설정 시간 ON/OFF, 2회 반복") {
+                                                        Text("モード運転６, ONタイマー設定、OFFタイマー設定、2回選択")
+                                                            .font(Font.custom("Pretendard", size: 16).weight(.bold))
+                                                            .foregroundColor(.textLight)
+                                                            .padding(.top, 12)
+                                                    }
+                                                    
+                                                    
+                                                    
                                                     
                                                     VStack {
                                                         if selectedMode == "모드 1, 일몰 켜짐, 일출 꺼짐" {
@@ -579,7 +628,7 @@ struct LandingView: View {
                                                         else if (selectedMode == "모드 5, 설정 시간 ON/OFF, 1회 반복") {
                                                             HStack(alignment: .top, spacing: 4) {
                                                                 HStack(spacing: 0) {
-                                                                    Text("ON")
+                                                                    Text("\(dateToOnTime1(date: Mode5OnTime))")
                                                                         .font(Font.custom("Pretendard", size: 12).weight(.semibold))
                                                                         .lineSpacing(12)
                                                                         .foregroundColor(.textLight)
@@ -590,7 +639,7 @@ struct LandingView: View {
                                                                 Spacer()
                                                                 
                                                                 HStack(spacing: 0) {
-                                                                    Text("OFF")
+                                                                    Text("\(dateToOffTime2(date: Mode5OffTime))")
                                                                         .font(Font.custom("Pretendard", size: 12).weight(.semibold))
                                                                         .lineSpacing(12)
                                                                         .foregroundColor(.textLight)
@@ -650,7 +699,7 @@ struct LandingView: View {
                                                         else if (selectedMode == "모드 6, 설정 시간 ON/OFF, 2회 반복") {
                                                             HStack(alignment: .top, spacing: 4) {
                                                                 HStack(spacing: 0) {
-                                                                    Text("ON")
+                                                                    Text("\(dateToOnTime3(date: Mode6OnTime))")
                                                                         .font(Font.custom("Pretendard", size: 12).weight(.semibold))
                                                                         .lineSpacing(12)
                                                                         .foregroundColor(.textLight)
@@ -661,7 +710,7 @@ struct LandingView: View {
                                                                 Spacer()
                                                                 
                                                                 HStack(spacing: 0) {
-                                                                    Text("OFF")
+                                                                    Text("\(dateToOffTime4(date: Mode6OffTime))")
                                                                         .font(Font.custom("Pretendard", size: 12).weight(.semibold))
                                                                         .lineSpacing(12)
                                                                         .foregroundColor(.textLight)
@@ -672,7 +721,7 @@ struct LandingView: View {
                                                                 Spacer()
                                                                 
                                                                 HStack(spacing: 0) {
-                                                                    Text("ON")
+                                                                    Text("\(dateToOnTime5(date: Mode6OnTime2))")
                                                                         .font(Font.custom("Pretendard", size: 12).weight(.semibold))
                                                                         .lineSpacing(12)
                                                                         .foregroundColor(.textLight)
@@ -683,7 +732,7 @@ struct LandingView: View {
                                                                 Spacer()
                                                                 
                                                                 HStack(spacing: 0) {
-                                                                    Text("OFF")
+                                                                    Text("\(dateToOffTime6(date: Mode6OffTime2))")
                                                                         .font(Font.custom("Pretendard", size: 12).weight(.semibold))
                                                                         .lineSpacing(12)
                                                                         .foregroundColor(.textLight)
@@ -772,6 +821,9 @@ struct LandingView: View {
                                         .cornerRadius(24)
                                         .padding()
                                         .padding(.top, -20)
+                                        .onAppear {
+                                            loadSettingTimes()
+                                        }
                                     }
                                 }
                                 
@@ -915,6 +967,15 @@ struct LandingView: View {
         }
     }
     
+    func loadSettingTimes() {
+        Mode5OnTime = UserDefaults.standard.object(forKey: "Mode5 OnTime") as? Date ?? Date()
+        Mode5OffTime = UserDefaults.standard.object(forKey: "Mode5 OffTime") as? Date ?? Date()
+        Mode6OnTime = UserDefaults.standard.object(forKey: "Mode6 OnTime") as? Date ?? Date() // 일몰 전 시간
+        Mode6OffTime = UserDefaults.standard.object(forKey: "Mode6 OffTime") as? Date ?? Date() // 일몰 후 시간
+        Mode6OnTime2 = UserDefaults.standard.object(forKey: "Mode6 OnTime2") as? Date ?? Date()
+        Mode6OffTime2 = UserDefaults.standard.object(forKey: "Mode6 OffTime2") as? Date ?? Date()
+    }
+    
     func sendEmergencyData() {
         if !bluetoothManager.bluetoothIsReady {
             print("시리얼이 준비되지 않음")
@@ -1032,6 +1093,56 @@ struct LandingView: View {
         }
         return nil
     }
+    
+    func dateToOnTime1(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        let formattedDate = formatter.string(from: Mode5OnTime)
+        
+        return formattedDate
+    }
+    
+    func dateToOffTime2(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        let formattedDate = formatter.string(from: Mode5OffTime)
+        
+        return formattedDate
+    }
+    
+    func dateToOnTime3(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        let formattedDate = formatter.string(from: Mode6OnTime)
+        
+        return formattedDate
+    }
+    
+    func dateToOffTime4(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        let formattedDate = formatter.string(from: Mode6OffTime)
+        
+        return formattedDate
+    }
+    
+    func dateToOnTime5(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        let formattedDate = formatter.string(from: Mode6OnTime2)
+        
+        return formattedDate
+    }
+    
+    func dateToOffTime6(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        let formattedDate = formatter.string(from: Mode6OffTime2)
+        
+        return formattedDate
+    }
+    
+    
 }
 
 //
